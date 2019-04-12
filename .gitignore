@@ -76,3 +76,7 @@ Plugins/*/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 Content/NoneUploadedAssets/*
+Content/ArbitraryStudio/*
+Content/ForestSet/*
+Content/StarterContent/*
+Content/WeaponEffects/*
