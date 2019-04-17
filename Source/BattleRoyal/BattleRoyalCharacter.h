@@ -29,10 +29,24 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
-protected:
 
-	/** Resets HMD orientation in VR. */
-	void OnResetVR();
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Camera)
+	float ForwardValue;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Camera)
+	float RightValue;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Status)
+	float HP;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Status)
+	bool RifleEquipped;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Status)
+	bool Aiming;
+
+
+protected:
 
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
@@ -51,13 +65,6 @@ protected:
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
-
-	/** Handler for when a touch input begins. */
-	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
-
-	/** Handler for when a touch input stops. */
-	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
-
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

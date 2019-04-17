@@ -68,29 +68,8 @@ void ABattleRoyalCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &ABattleRoyalCharacter::LookUpAtRate);
 
-	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &ABattleRoyalCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &ABattleRoyalCharacter::TouchStopped);
-
-	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ABattleRoyalCharacter::OnResetVR);
 }
 
-
-void ABattleRoyalCharacter::OnResetVR()
-{
-	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
-}
-
-void ABattleRoyalCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		Jump();
-}
-
-void ABattleRoyalCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		StopJumping();
-}
 
 void ABattleRoyalCharacter::TurnAtRate(float Rate)
 {
@@ -106,6 +85,7 @@ void ABattleRoyalCharacter::LookUpAtRate(float Rate)
 
 void ABattleRoyalCharacter::MoveForward(float Value)
 {
+	ForwardValue = 0;
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
 		// find out which way is forward
@@ -114,12 +94,14 @@ void ABattleRoyalCharacter::MoveForward(float Value)
 
 		// get forward vector
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		ForwardValue = Value;
 		AddMovementInput(Direction, Value);
 	}
 }
 
 void ABattleRoyalCharacter::MoveRight(float Value)
 {
+	RightValue = 0;
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
 		// find out which way is right
@@ -128,6 +110,8 @@ void ABattleRoyalCharacter::MoveRight(float Value)
 	
 		// get right vector 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		
+		RightValue = Value;
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
