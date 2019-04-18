@@ -18,8 +18,12 @@ class ABattleRoyalCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
 public:
 	ABattleRoyalCharacter();
+
+	virtual void BeginPlay() override;
+
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -44,6 +48,24 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Status)
 	bool Aiming;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	UStaticMeshComponent* WeaponBack;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	UStaticMeshComponent* WeaponRight;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	USkeletalMeshComponent* Helmet;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	USkeletalMeshComponent* Shirt;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	USkeletalMeshComponent* Pants;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	USkeletalMeshComponent* Shoes;
 
 
 protected:

@@ -6,6 +6,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -43,8 +45,46 @@ ABattleRoyalCharacter::ABattleRoyalCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	WeaponBack = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponBack"));
+	WeaponBack->bEditableWhenInherited = true;
+	//WeaponBack->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("WeaponBack"));
+	//WeaponBack->AttachTo(GetMesh(), "WeaponBack", EAttachLocation::SnapToTargetIncludingScale, true);
+	WeaponBack->SetupAttachment(GetMesh(), TEXT("WeaponBack"));
+
+
+	WeaponRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponRight"));
+	WeaponRight->bEditableWhenInherited = true;
+	//WeaponRight->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("WeaponRight"));
+	//WeaponRight->AttachTo(GetMesh(), "WeaponRight", EAttachLocation::SnapToTargetIncludingScale, true);
+	WeaponRight->SetupAttachment(GetMesh(), TEXT("WeaponRight"));
+
+
+	Helmet = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Helmet"));
+	Helmet->SetupAttachment(GetMesh());
+
+
+	Shirt = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Shirt"));
+	Shirt->SetupAttachment(GetMesh());
+	
+	Pants = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Pants"));
+	Pants->SetupAttachment(GetMesh());
+	
+	Shoes = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Shoes"));
+	Shoes->SetupAttachment(GetMesh());
+
+
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+}
+
+void ABattleRoyalCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	Helmet->SetMasterPoseComponent(GetMesh());
+	Shirt->SetMasterPoseComponent(GetMesh());
+	Pants->SetMasterPoseComponent(GetMesh());
+	Shoes->SetMasterPoseComponent(GetMesh());
 }
 
 //////////////////////////////////////////////////////////////////////////
