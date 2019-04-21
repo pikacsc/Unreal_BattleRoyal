@@ -45,30 +45,19 @@ ABattleRoyalCharacter::ABattleRoyalCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	WeaponBack = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponBack"));
-	WeaponBack->bEditableWhenInherited = true;
-	//WeaponBack->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("WeaponBack"));
-	//WeaponBack->AttachTo(GetMesh(), "WeaponBack", EAttachLocation::SnapToTargetIncludingScale, true);
-	WeaponBack->SetupAttachment(GetMesh(), TEXT("WeaponBack"));
-
-
-	WeaponRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponRight"));
-	WeaponRight->bEditableWhenInherited = true;
-	//WeaponRight->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("WeaponRight"));
-	//WeaponRight->AttachTo(GetMesh(), "WeaponRight", EAttachLocation::SnapToTargetIncludingScale, true);
-	WeaponRight->SetupAttachment(GetMesh(), TEXT("WeaponRight"));
-
 
 	Helmet = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Helmet"));
 	Helmet->SetupAttachment(GetMesh());
 
+	Head = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Head"));
+	Head->SetupAttachment(GetMesh());
+	
+	Upper = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Upper"));
+	Upper->SetupAttachment(GetMesh());
 
-	Shirt = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Shirt"));
-	Shirt->SetupAttachment(GetMesh());
-	
-	Pants = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Pants"));
-	Pants->SetupAttachment(GetMesh());
-	
+	Lower = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Lower"));
+	Lower->SetupAttachment(GetMesh());
+
 	Shoes = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Shoes"));
 	Shoes->SetupAttachment(GetMesh());
 
@@ -82,8 +71,9 @@ void ABattleRoyalCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	Helmet->SetMasterPoseComponent(GetMesh());
-	Shirt->SetMasterPoseComponent(GetMesh());
-	Pants->SetMasterPoseComponent(GetMesh());
+	Head->SetMasterPoseComponent(GetMesh());
+	Upper->SetMasterPoseComponent(GetMesh());
+	Lower->SetMasterPoseComponent(GetMesh());
 	Shoes->SetMasterPoseComponent(GetMesh());
 }
 

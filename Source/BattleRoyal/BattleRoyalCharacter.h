@@ -40,7 +40,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Camera)
 	float RightValue;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Status)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Status)
 	float HP;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Status)
@@ -50,19 +50,16 @@ public:
 	bool Aiming;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
-	UStaticMeshComponent* WeaponBack;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
-	UStaticMeshComponent* WeaponRight;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
 	USkeletalMeshComponent* Helmet;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
-	USkeletalMeshComponent* Shirt;
+	USkeletalMeshComponent* Head;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
-	USkeletalMeshComponent* Pants;
+	USkeletalMeshComponent* Upper;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
+	USkeletalMeshComponent* Lower;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Character)
 	USkeletalMeshComponent* Shoes;
